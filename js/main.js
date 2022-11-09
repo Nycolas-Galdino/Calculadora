@@ -36,17 +36,22 @@ function teclado(event){
     var key = event.keyCode || event.which;
     let keypressed = String.fromCodePoint(key); 
 
-        console.log(keypressed)
     if (keypressed.toUpperCase() == "O") {
         return OnOff()
     }
 
     if (event.key == "Enter") {
+        if (document.getElementById("resultado").innerHTML == ""){
+            return alert("A conta está vazia.")
+        };
         return result()
     }
 
+    if (keypressed.toUpperCase() == "C") {
+        return clean()
+    }
+
     if ("1234567890.-*/()x".indexOf(keypressed) > -1 || keypressed == "+"){
-        console.log('ok')
         return getBtn(keypressed)
     }
     
