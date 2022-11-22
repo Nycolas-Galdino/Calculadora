@@ -71,7 +71,11 @@ body{
 
 }
 
-#btn0 {width: 68.5%;}
+#numPad .btn:hover {
+    background-color: rgb(102, 102, 102);
+}
+
+#btn0 {flex: 0.85 1 40%;}
 
 /*Configurações do Histórico*/
 
@@ -104,4 +108,14 @@ width: 100%;
 background-color: black;
 color: white;
 padding: 1vh 0;
+}
+
+footer a {
+    text-decoration: none;
+    color: white;
+}
+
+footer a:hover {
+    text-decoration: underline;
+    color:rgb(83, 95, 255)
 }
