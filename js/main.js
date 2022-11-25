@@ -6,24 +6,26 @@ const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
 
 function abrirMenu() {
+    /* Executa a animação de abrir o menu */
     menuAberto.style.animation = "menu-animation 2s"
     menuAberto.style.display = "block";
     menuFechado.style.display = "none";
 
+    /* Aguarda acabar animação e retira a mesma da div*/
     setTimeout(() => {
     menuAberto.style.animation = ""
     }, 2000);
 };
 
 function fecharMenu() {
+    /* Executa a animação de fechar o menu */
     menuAberto.style.animation = "menu-animation 2s"
     menuAberto.style.animationDirection = "reverse"
     
-
+    /* Aguarda a animação acabar */
     setTimeout(() => {
         menuFechado.style.display = "block";
         menuAberto.style.display = "none";
-        console.log('Menu fechado com sucesso!')
     }, 1900);
 
 };
@@ -31,6 +33,7 @@ function fecharMenu() {
 function result() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") { return alert("A calculadora está desligada \n Pressione 'o' para ligar a mesma.") }
 
+    /* Pega o resultado do site, e tenta calcular ele, caso contrário, retorna um alerta de erro */
     let resultado = document.getElementById("resultado").value
     try {
         document.getElementById("resultado").value = eval(resultado)
@@ -46,9 +49,9 @@ function result() {
     } catch (error) {
         return alert("Operação sem semântica")
     }
-
 };
-
+  
+    /* Retorna o número dentro da área de cálculo */
 function getBtn(btn) {
     if (newSearch == true & "1234567890".indexOf(btn) > -1) { clean() }
 
@@ -61,9 +64,12 @@ function getBtn(btn) {
     resultado.value = texto + btn
 };
 
+    /* Limpa a área de cálculo */
 function clean() {
     document.getElementById("resultado").value = ""
 };
+
+     /* Liga/Desliga a calculadora */
 
 function OnOff() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") {
@@ -79,6 +85,7 @@ function OnOff() {
     }
 };
 
+    /* Verifica qual botão foi apertado e como deve proceder com a ação. */
 function teclado(event) {
     var key = event.keyCode || event.which;
     let keypressed = String.fromCodePoint(key);
