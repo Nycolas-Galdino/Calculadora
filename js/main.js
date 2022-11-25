@@ -5,6 +5,33 @@ var newSearch = false
 const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
 
+const inCorDoFundo = document.getElementById("cor-do-fundo").value
+const inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
+const inCorDosBotoes = document.getElementById("cor-dos-botoes").value
+
+function salvarTema () {
+    var tema = localStorage
+    
+    let lStorage = JSON.stringify(tema.getItem("tema-site"))
+
+    if (lStorage == null) {
+        tema.setItem("tema-site", "[]")
+        lStorage = []
+    }
+
+    const dados = {
+        corFundo: inCorDoFundo,
+        corCalculadora: inCorDaCalculadora,
+        corBotoes: inCorDosBotoes
+    }
+
+    lStorage
+
+    tema.setItem("tema-site", JSON.stringify(dados))
+    alert("Tema salvo com sucesso!")
+
+}
+
 function abrirMenu() {
     /* Executa a animação de abrir o menu */
     menuAberto.style.animation = "menu-animation 2s"
@@ -70,7 +97,6 @@ function clean() {
 };
 
      /* Liga/Desliga a calculadora */
-
 function OnOff() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") {
         document.getElementById("btnOnOff").innerHTML = "On"
