@@ -1,21 +1,49 @@
 document.addEventListener('keypress', teclado);
-var newSearch = false
 
+var newSearch = false
 
 const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
 
-const inCorDoFundo = document.getElementById("cor-do-fundo").value
-const inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
-const inCorDosBotoes = document.getElementById("cor-dos-botoes").value
 
-function salvarTema () {
-    var tema = localStorage
-    
-    let lStorage = JSON.stringify(tema.getItem("tema-site"))
+function lerTema() {
+
+    let lStorage = JSON.stringify(localStorage.getItem("tema-site"))
+
+    if (lStorage == null) { return }
+
+    let temaLido = JSON.parse(localStorage["tema-site"])
+
+    document.body.style.setProperty('--fundo', temaLido['corFundo']);
+    document.body.style.setProperty('--fundo-dos-botoes', temaLido['corBotoes']);
+    document.body.style.setProperty('--fundo-calculadora-historico', temaLido['corCalculadora']);
+    if (temaLido['corBotoes'] == "#000000") { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
+
+    document.getElementById("cor-do-fundo").value = temaLido['corFundo'];
+    document.getElementById("cor-calculadora-historico").value = temaLido['corCalculadora']
+    document.getElementById("cor-dos-botoes").value = temaLido['corBotoes']
+
+
+}
+
+
+function testarTema() {
+    document.body.style.setProperty('--fundo', inCorDoFundo)
+    document.body.style.setProperty('--fundo-dos-botoes', inCorDosBotoes)
+    document.body.style.setProperty('--fundo-calculadora-historico', inCorDaCalculadora)
+}
+
+function salvarTema() {
+    const inCorDoFundo = document.getElementById("cor-do-fundo").value
+    const inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
+    const inCorDosBotoes = document.getElementById("cor-dos-botoes").value
+
+
+
+    let lStorage = JSON.stringify(localStorage.getItem("tema-site"))
 
     if (lStorage == null) {
-        tema.setItem("tema-site", "[]")
+        localStorage.setItem("tema-site", "[]")
         lStorage = []
     }
 
@@ -25,9 +53,8 @@ function salvarTema () {
         corBotoes: inCorDosBotoes
     }
 
-    lStorage
 
-    tema.setItem("tema-site", JSON.stringify(dados))
+    localStorage.setItem("tema-site", JSON.stringify(dados))
     alert("Tema salvo com sucesso!")
 
 }
@@ -40,7 +67,7 @@ function abrirMenu() {
 
     /* Aguarda acabar animação e retira a mesma da div*/
     setTimeout(() => {
-    menuAberto.style.animation = ""
+        menuAberto.style.animation = ""
     }, 2000);
 };
 
@@ -48,7 +75,7 @@ function fecharMenu() {
     /* Executa a animação de fechar o menu */
     menuAberto.style.animation = "menu-animation 2s"
     menuAberto.style.animationDirection = "reverse"
-    
+
     /* Aguarda a animação acabar */
     setTimeout(() => {
         menuFechado.style.display = "block";
@@ -77,8 +104,8 @@ function result() {
         return alert("Operação sem semântica")
     }
 };
-  
-    /* Retorna o número dentro da área de cálculo */
+
+/* Retorna o número dentro da área de cálculo */
 function getBtn(btn) {
     if (newSearch == true & "1234567890".indexOf(btn) > -1) { clean() }
 
@@ -91,12 +118,12 @@ function getBtn(btn) {
     resultado.value = texto + btn
 };
 
-    /* Limpa a área de cálculo */
+/* Limpa a área de cálculo */
 function clean() {
     document.getElementById("resultado").value = ""
 };
 
-     /* Liga/Desliga a calculadora */
+/* Liga/Desliga a calculadora */
 function OnOff() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") {
         document.getElementById("btnOnOff").innerHTML = "On"
@@ -111,7 +138,7 @@ function OnOff() {
     }
 };
 
-    /* Verifica qual botão foi apertado e como deve proceder com a ação. */
+/* Verifica qual botão foi apertado e como deve proceder com a ação. */
 function teclado(event) {
     var key = event.keyCode || event.which;
     let keypressed = String.fromCodePoint(key);
