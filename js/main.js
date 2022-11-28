@@ -1,16 +1,23 @@
+document.addEventListener('load', lerTema, true)
 document.addEventListener('keypress', teclado);
-document.addEventListener('input', testarTema, false)
+document.querySelector('#menu-aberto ul').addEventListener('input', testarTema, false)
 
 var newSearch = false
 
 const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
 
+/* Carrega o tema ao entrar no site */
 function lerTema() {
 
     let lStorage = JSON.stringify(localStorage.getItem("tema-site"))
 
-    if (lStorage == null) { return }
+    if (lStorage == null) { 
+        document.getElementById("cor-do-fundo").value = '#330033';
+        document.getElementById("cor-calculadora-historico").value = '#e6e6e6';
+        document.getElementById("cor-dos-botoes").value = "#999999";
+        return
+    }
 
     let temaLido = JSON.parse(localStorage["tema-site"])
 
@@ -18,31 +25,34 @@ function lerTema() {
     document.body.style.setProperty('--fundo-dos-botoes', temaLido['corBotoes']);
     document.body.style.setProperty('--fundo-calculadora-historico', temaLido['corCalculadora']);
     if (temaLido['corBotoes'] == "#000000") { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
+    else {document.body.style.setProperty("--cor-dos-números-botoes", "#000000")}
+    
+
 
     document.getElementById("cor-do-fundo").value = temaLido['corFundo'];
     document.getElementById("cor-calculadora-historico").value = temaLido['corCalculadora']
     document.getElementById("cor-dos-botoes").value = temaLido['corBotoes']
-
-
 }
 
-
+/* Testa o tema em tempo real */
 function testarTema() {
     let inCorDoFundo = document.getElementById("cor-do-fundo").value
     let inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
     let inCorDosBotoes = document.getElementById("cor-dos-botoes").value
 
-    document.body.style.setProperty('--fundo', inCorDoFundo );
+    document.body.style.setProperty('--fundo', inCorDoFundo);
     document.body.style.setProperty('--fundo-dos-botoes', inCorDosBotoes);
     document.body.style.setProperty('--fundo-calculadora-historico', inCorDaCalculadora);
-    if (inCorDosBotoes == "#000000") { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
+    if (inCorDosBotoes == "#000000" ) { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
+    else {document.body.style.setProperty("--cor-dos-números-botoes", "#000000")}
 }
 
+/* Salva as cores do tema */
 function salvarTema() {
     let inCorDoFundo = document.getElementById("cor-do-fundo").value
     let inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
     let inCorDosBotoes = document.getElementById("cor-dos-botoes").value
-    
+
     let lStorage = JSON.stringify(localStorage.getItem("tema-site"))
 
     if (lStorage == null) {
@@ -62,6 +72,7 @@ function salvarTema() {
 
 }
 
+/* Abre o menu */
 function abrirMenu() {
     /* Executa a animação de abrir o menu */
     menuAberto.style.animation = "menu-animation 2s"
@@ -74,6 +85,7 @@ function abrirMenu() {
     }, 2000);
 };
 
+/* Fecha o menu*/
 function fecharMenu() {
     /* Executa a animação de fechar o menu */
     menuAberto.style.animation = "menu-animation 2s"
@@ -87,6 +99,7 @@ function fecharMenu() {
 
 };
 
+/* Mostra o resultado da operação */
 function result() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") { return alert("A calculadora está desligada \n Pressione 'o' para ligar a mesma.") }
 
@@ -133,6 +146,7 @@ function OnOff() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") {
         document.getElementById("btnOnOff").innerHTML = "On"
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(144, 238, 144)"
+        document.getElementById("resultado").removeAttribute("disabled")
     }
 
     else if (document.getElementById("btnOnOff").innerHTML == "On") {
@@ -140,6 +154,7 @@ function OnOff() {
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(240, 128, 128)"
         document.getElementById("listaHistorico").innerHTML = ""
         clean()
+        document.getElementById("resultado").setAttribute("disabled", "disabled")
     }
 };
 
