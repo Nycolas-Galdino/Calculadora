@@ -146,12 +146,12 @@ body {
 .historico ul li {
     display: flex;
     font-size: 2rem;
-    border: 1px solid black;
+    border: 1px solid var(--borda-dos-botoes);
     padding: 2%;
     justify-content: flex-end;
     flex-wrap: wrap;
     max-width: 100%;
-
+    color: var(--cor-dos-números-botoes);
 }
 
 .historico ul li:nth-last-child(1) {
