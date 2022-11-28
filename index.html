@@ -10,7 +10,7 @@
     <link rel="stylesheet" href="css/styles.css">
 </head>
 
-<body onload="lerTema()">
+<body>
     <section class="menu">
         <div id="menu-fechado">
             <img src="Images/Seta2.png" alt="Abrir configurações" style="width:5vw; rotate: 180deg;"
@@ -25,9 +25,7 @@
                 <li>Cor dos botões: <input type="color" name="Cor dos botões" id="cor-dos-botoes"></li>
             </ul>
 
-
             <button id="salvar" onclick="salvarTema()">Salvar</button>
-
 
             <img src="Images/Seta1.png" alt="Fechar configurações" style="width: 7vw;rotate: 180deg;"
                 onclick="fecharMenu()" id="seta-fechar-menu">
@@ -36,7 +34,7 @@
     </section>
     <section class="calculadora">
         <section class="operacoes">
-            <input id="resultado" maxlength="15" disabled="true"></input>
+            <input id="resultado" maxlength="15"></input>
             <div id="numPad">
                 <div class="btn" onclick="OnOff()" id="btnOnOff" style="background-color:rgb(240, 128, 128)">Off</div>
                 <div class="btn" onclick="clean()" id="btnClear">C</div>
