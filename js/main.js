@@ -1,10 +1,10 @@
 document.addEventListener('keypress', teclado);
+document.addEventListener('input', testarTema, false)
 
 var newSearch = false
 
 const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
-
 
 function lerTema() {
 
@@ -28,18 +28,21 @@ function lerTema() {
 
 
 function testarTema() {
-    document.body.style.setProperty('--fundo', inCorDoFundo)
-    document.body.style.setProperty('--fundo-dos-botoes', inCorDosBotoes)
-    document.body.style.setProperty('--fundo-calculadora-historico', inCorDaCalculadora)
+    let inCorDoFundo = document.getElementById("cor-do-fundo").value
+    let inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
+    let inCorDosBotoes = document.getElementById("cor-dos-botoes").value
+
+    document.body.style.setProperty('--fundo', inCorDoFundo );
+    document.body.style.setProperty('--fundo-dos-botoes', inCorDosBotoes);
+    document.body.style.setProperty('--fundo-calculadora-historico', inCorDaCalculadora);
+    if (inCorDosBotoes == "#000000") { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
 }
 
 function salvarTema() {
-    const inCorDoFundo = document.getElementById("cor-do-fundo").value
-    const inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
-    const inCorDosBotoes = document.getElementById("cor-dos-botoes").value
-
-
-
+    let inCorDoFundo = document.getElementById("cor-do-fundo").value
+    let inCorDaCalculadora = document.getElementById("cor-calculadora-historico").value
+    let inCorDosBotoes = document.getElementById("cor-dos-botoes").value
+    
     let lStorage = JSON.stringify(localStorage.getItem("tema-site"))
 
     if (lStorage == null) {
@@ -107,6 +110,8 @@ function result() {
 
 /* Retorna o número dentro da área de cálculo */
 function getBtn(btn) {
+    if (document.getElementById("btnOnOff").innerHTML == "Off") { return alert("A calculadora está desligada \n Pressione 'o' para ligar a mesma.") }
+
     if (newSearch == true & "1234567890".indexOf(btn) > -1) { clean() }
 
     newSearch = false
