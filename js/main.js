@@ -1,11 +1,16 @@
-document.addEventListener('load', lerTema, true)
-document.addEventListener('keypress', teclado);
+document.addEventListener('load', carregarPagina, true)
+document.addEventListener('keydown', teclado);
 document.querySelector('#menu-aberto ul').addEventListener('input', testarTema, false)
 
 var newSearch = false
 
 const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
+
+function carregarPagina(){
+    lerTema()
+    document.getElementById("resultado").setAttribute("disabled", "disabled")
+}
 
 /* Carrega o tema ao entrar no site */
 function lerTema() {
@@ -130,9 +135,8 @@ function getBtn(btn) {
     newSearch = false
     let resultado = document.getElementById("resultado")
     let texto = document.getElementById("resultado").value
-
     if (texto.length > 15) { return alert("Máximo de 15 caracteres atingido") }
-
+    
     resultado.value = texto + btn
 };
 
@@ -141,12 +145,17 @@ function clean() {
     document.getElementById("resultado").value = ""
 };
 
+function backspace() {
+    var calculo = document.getElementById("resultado").value
+   
+    document.getElementById("resultado").value = String(calculo).substring(0,calculo.length - 1)
+}
+
 /* Liga/Desliga a calculadora */
 function OnOff() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") {
         document.getElementById("btnOnOff").innerHTML = "On"
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(144, 238, 144)"
-        document.getElementById("resultado").removeAttribute("disabled")
     }
 
     else if (document.getElementById("btnOnOff").innerHTML == "On") {
@@ -154,26 +163,23 @@ function OnOff() {
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(240, 128, 128)"
         document.getElementById("listaHistorico").innerHTML = ""
         clean()
-        document.getElementById("resultado").setAttribute("disabled", "disabled")
     }
 };
 
 /* Verifica qual botão foi apertado e como deve proceder com a ação. */
 function teclado(event) {
-    var key = event.keyCode || event.which;
-    let keypressed = String.fromCodePoint(key);
+    let keypressed = event.key;
 
     if (keypressed.toUpperCase() == "O") {
         return OnOff()
     }
-
 
     if (document.getElementById("btnOnOff").innerHTML == "Off") {
         clean()
         return alert("A calculadora está desligada \n Pressione 'o' para ligar a mesma.");
     }
 
-    if (event.key == "Enter") {
+    if (keypressed == "Enter") {
         if (document.getElementById("resultado").value == "") {
             return alert("A conta está vazia.")
         };
@@ -184,7 +190,11 @@ function teclado(event) {
         return clean()
     }
 
-    if ("1234567890.-*/()x".indexOf(keypressed) > -1 || keypressed == "+") {
+    if (keypressed == "Backspace") {
+        return backspace()
+    }
+
+    if ("1234567890,-*/()x".indexOf(keypressed) > -1 || keypressed == "+") {
         return getBtn(keypressed)
     }
 
