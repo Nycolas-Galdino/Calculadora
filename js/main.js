@@ -132,6 +132,7 @@ function getBtn(btn) {
 
     if (newSearch == true & "1234567890".indexOf(btn) > -1) { clean() }
 
+    if (btn == ","){btn = "."}
     newSearch = false
     let resultado = document.getElementById("resultado")
     let texto = document.getElementById("resultado").value
@@ -157,7 +158,7 @@ function OnOff() {
         document.getElementById("btnOnOff").innerHTML = "On"
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(144, 238, 144)"
     }
-
+    
     else if (document.getElementById("btnOnOff").innerHTML == "On") {
         document.getElementById("btnOnOff").innerHTML = "Off"
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(240, 128, 128)"
@@ -194,9 +195,9 @@ function teclado(event) {
         return backspace()
     }
 
-    if ("1234567890,-*/()x".indexOf(keypressed) > -1 || keypressed == "+") {
+    if ("1234567890.,+-*/()x".indexOf(keypressed) > -1) {
         return getBtn(keypressed)
     }
 
-    else (alert("Botão não aceito pela calculadora"))
+    alert("Botão não aceito pela calculadora")
 }
