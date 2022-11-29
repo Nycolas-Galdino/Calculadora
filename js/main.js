@@ -111,11 +111,11 @@ function result() {
     /* Pega o resultado do site, e tenta calcular ele, caso contrário, retorna um alerta de erro */
     let resultado = document.getElementById("resultado").value
     try {
-        document.getElementById("resultado").value = eval(resultado)
+        document.getElementById("resultado").value = Number(eval(resultado)).toFixed(4)
 
         let hist = document.getElementById("listaHistorico").innerHTML
 
-        hist = `${hist} <li> ${resultado} = ${eval(resultado)} </li>`;
+        hist = `${hist} <li> ${resultado} = ${Number(eval(resultado)).toFixed(10)} </li>`;
 
         document.getElementById('listaHistorico').innerHTML = hist
 
