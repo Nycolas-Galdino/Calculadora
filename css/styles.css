@@ -50,6 +50,13 @@ body {
     width: 100%;
     border: 1px solid var(--borda-dos-botoes);
     font-size: 1.2rem;
+    min-width: 14px;
+}
+
+#menu-fechado img,
+#seta-fechar-menu {
+    min-height: 10px;
+    min-width: 40px;
 }
 
 /*Configurações da calculadora*/
@@ -121,10 +128,11 @@ body {
 
 #numPad .btn:hover {
     background-color: rgb(175, 175, 175);
+    cursor: pointer;
 }
 
 #btn0 {
-    flex: 0.85 1 40%;
+    flex: 0.85 1 8%;
 }
 
 /*Configurações do Histórico*/
@@ -152,6 +160,7 @@ body {
     flex-wrap: wrap;
     max-width: 100%;
     color: var(--cor-dos-números-botoes);
+    background-color: #000000;
 }
 
 .historico ul li:nth-last-child(1) {
