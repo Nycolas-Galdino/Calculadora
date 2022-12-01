@@ -110,6 +110,7 @@ function result() {
 
     /* Pega o resultado do site, e tenta calcular ele, caso contrário, retorna um alerta de erro */
     var calculo = document.getElementById("resultado").value
+    calculo = String(calculo).replace(',','.')
 
     /* Testa se o número é um número inteiro e retorna o cálculo dependendo do valor*/
     if (Number.isInteger(eval(calculo))) {
