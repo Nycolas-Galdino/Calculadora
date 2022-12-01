@@ -7,7 +7,7 @@ var newSearch = false
 const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
 
-function carregarPagina(){
+function carregarPagina() {
     lerTema()
     document.getElementById("resultado").setAttribute("disabled", "disabled")
 }
@@ -17,7 +17,7 @@ function lerTema() {
 
     let lStorage = JSON.stringify(localStorage.getItem("tema-site"))
 
-    if (lStorage == null) { 
+    if (lStorage == null) {
         document.getElementById("cor-do-fundo").value = '#330033';
         document.getElementById("cor-calculadora-historico").value = '#e6e6e6';
         document.getElementById("cor-dos-botoes").value = "#999999";
@@ -30,8 +30,8 @@ function lerTema() {
     document.body.style.setProperty('--fundo-dos-botoes', temaLido['corBotoes']);
     document.body.style.setProperty('--fundo-calculadora-historico', temaLido['corCalculadora']);
     if (temaLido['corBotoes'] == "#000000") { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
-    else {document.body.style.setProperty("--cor-dos-números-botoes", "#000000")}
-    
+    else { document.body.style.setProperty("--cor-dos-números-botoes", "#000000") }
+
 
 
     document.getElementById("cor-do-fundo").value = temaLido['corFundo'];
@@ -48,8 +48,8 @@ function testarTema() {
     document.body.style.setProperty('--fundo', inCorDoFundo);
     document.body.style.setProperty('--fundo-dos-botoes', inCorDosBotoes);
     document.body.style.setProperty('--fundo-calculadora-historico', inCorDaCalculadora);
-    if (inCorDosBotoes == "#000000" ) { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
-    else {document.body.style.setProperty("--cor-dos-números-botoes", "#000000")}
+    if (inCorDosBotoes == "#000000") { document.body.style.setProperty("--cor-dos-números-botoes", "#FFFFFF") }
+    else { document.body.style.setProperty("--cor-dos-números-botoes", "#000000") }
 }
 
 /* Salva as cores do tema */
@@ -109,13 +109,22 @@ function result() {
     if (document.getElementById("btnOnOff").innerHTML == "Off") { return alert("A calculadora está desligada \n Pressione 'o' para ligar a mesma.") }
 
     /* Pega o resultado do site, e tenta calcular ele, caso contrário, retorna um alerta de erro */
-    let resultado = document.getElementById("resultado").value
+    var calculo = document.getElementById("resultado").value
+
+    /* Testa se o número é um número inteiro e retorna o cálculo dependendo do valor*/
+    if (Number.isInteger(eval(calculo))) {
+        var resultado = eval(calculo)
+    }
+    else {
+        var resultado = Number(eval(calculo)).toFixed(3)
+    }
+
     try {
-        document.getElementById("resultado").value = Number(eval(resultado)).toFixed(4)
+        document.getElementById("resultado").value = String(resultado).replace(".", ",")
 
         let hist = document.getElementById("listaHistorico").innerHTML
 
-        hist = `${hist} <li> ${resultado} = ${Number(eval(resultado)).toFixed(10)} </li>`;
+        hist = `${hist} <li> ${String(calculo).replace(".", ",")} = ${String(resultado).replace(".", ",")} </li>`;
 
         document.getElementById('listaHistorico').innerHTML = hist
 
@@ -132,12 +141,11 @@ function getBtn(btn) {
 
     if (newSearch == true & "1234567890".indexOf(btn) > -1) { clean() }
 
-    if (btn == ","){btn = "."}
     newSearch = false
     let resultado = document.getElementById("resultado")
     let texto = document.getElementById("resultado").value
     if (texto.length > 15) { return alert("Máximo de 15 caracteres atingido") }
-    
+
     resultado.value = texto + btn
 };
 
@@ -148,8 +156,8 @@ function clean() {
 
 function backspace() {
     var calculo = document.getElementById("resultado").value
-   
-    document.getElementById("resultado").value = String(calculo).substring(0,calculo.length - 1)
+
+    document.getElementById("resultado").value = String(calculo).substring(0, calculo.length - 1)
 }
 
 /* Liga/Desliga a calculadora */
@@ -158,7 +166,7 @@ function OnOff() {
         document.getElementById("btnOnOff").innerHTML = "On"
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(144, 238, 144)"
     }
-    
+
     else if (document.getElementById("btnOnOff").innerHTML == "On") {
         document.getElementById("btnOnOff").innerHTML = "Off"
         document.getElementById("btnOnOff").style.backgroundColor = "rgb(240, 128, 128)"
@@ -177,7 +185,7 @@ function teclado(event) {
 
     if (document.getElementById("btnOnOff").innerHTML == "Off") {
         clean()
-        return alert("A calculadora está desligada \n Pressione 'o' para ligar a mesma.");
+        return alert("A calculadora está desligada \n Pressione o botão 'Off' ou a letra 'O' para ligar a mesma.");
     }
 
     if (keypressed == "Enter") {
