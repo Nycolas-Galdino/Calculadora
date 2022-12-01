@@ -7,6 +7,8 @@ var newSearch = false
 const menuAberto = document.getElementById("menu-aberto")
 const menuFechado = document.getElementById("menu-fechado")
 
+const botoesIgnorados = ['Control', 'Shift', 'Alt', 'Escape', ' ', 'Meta','CapsLock', 'F5', 'NumLock', 'AltGraph']
+
 function carregarPagina() {
     lerTema()
     document.getElementById("resultado").setAttribute("disabled", "disabled")
@@ -179,6 +181,8 @@ function OnOff() {
 /* Verifica qual botão foi apertado e como deve proceder com a ação. */
 function teclado(event) {
     let keypressed = event.key;
+
+    if(botoesIgnorados.indexOf(keypressed) > -1) {return}
 
     if (keypressed.toUpperCase() == "O") {
         return OnOff()
