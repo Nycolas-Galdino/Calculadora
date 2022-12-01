@@ -196,7 +196,7 @@ function teclado(event) {
         return result()
     }
 
-    if (keypressed.toUpperCase() == "C") {
+    if (keypressed.toUpperCase() == "C" || keypressed == "Delete" ) {
         return clean()
     }
 
