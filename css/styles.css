@@ -117,6 +117,8 @@ body {
     padding: 2% 2% 4% 2%;
     background-color: var(--fundo-dos-botoes);
     color: var(--cor-dos-números-botoes);
+    -webkit-text-stroke: 0.2px #f0f8ff;
+
     margin: 0 auto;
     border: 1px solid rgb(82, 82, 82);
     border-radius: 10px;
@@ -159,7 +161,7 @@ body {
     justify-content: flex-end;
     flex-wrap: wrap;
     max-width: 100%;
-    color: var(--cor-dos-números-botoes);
+    color: #f0f8ff;
     background-color: #000000;
 }
 
