@@ -51,10 +51,7 @@ Como cada usuário tem uma preferência de cores e temas, dentro da calculadora 
 ### Salvando o tema personalizado da página
 Ao terminar de atualizar o estilo da página conforme sua preferência, você poderá salvar e, nas próximas vezes que for entrar na página, a mesma irá carregar utilizando este tema.
 
-O tema da página será salvo dentro de seu navegador principal local, ou seja, o que for alterado nele não será salvo em outros dispositivos. Segue abaixo um GIF demonstrando o funcionamento do navegador em ação.
-
-![Exemplo de tema do site sendo salvo](médias/gif-salvando-tema-local.gif)
-
+O tema da página será salvo dentro de seu navegador principal local, ou seja, o que for alterado nele não será salvo em outros dispositivos.
 ## Criador
 
 Este projeto foi desenvolvido por [**Nycolas Pimentel Galdino**](https://github.com/Nycolas-Galdino) e está armazenado dentro de uma página no Github Pages para teste em qualquer dispositivo conectado a internet! [Clique para acessar a calculadora](https://nycolas-galdino.github.io/Calculadora/)
