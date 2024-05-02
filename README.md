@@ -41,7 +41,7 @@ Atalho        | Função
 --------------|----------------------------
 O             | Liga/Desliga a calculadora
 C ou Del      | Limpa a calculadora
-Backspace (←) | Exponenciação
+Backspace (←) | Apaga o dígito/símbolo enviado.
 
 ### Estilizando a página
 Como cada usuário tem uma preferência de cores e temas, dentro da calculadora foi criado um sistema que permite a personalização quase completa da calculadora através de um menu no canto superior direito da imagem (conforme ilustrado no GIF abaixo).
